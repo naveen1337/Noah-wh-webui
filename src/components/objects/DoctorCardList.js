@@ -21,13 +21,14 @@ export default function DoctorCardList(props) {
 		<Box style={{ height: "100%" }} border={0} p={2} m={1} bgcolor="#ffffff">
 			<Grid container>
 				<Grid item xs={12} md={3}>
-					<Box border={0}>
+					<Box display="flex" flexDirection="column" alignItems="center" border={0}>
 						<img
 							style={{
 								width: 120,
 								height: "100%",
 								resizeMode: "contain",
 								borderRadius: "100%",
+
 							}}
 							src="../../sampledoctor1.webp"
 							alt="doctor"
@@ -44,7 +45,7 @@ export default function DoctorCardList(props) {
 					<Box px={1} border={0}>
 						<Typography variant="h5">Dr.Robert Ford</Typography>
 						<Spicialities/>
-						<ServiceTime/>
+						<Typography variant="h6">Tamil / English</Typography>	
 						<Ratings/>
 					</Box>
 				</Grid>
@@ -82,7 +83,7 @@ const Ratings = (props)=>{
 	return (
 		<Box>
 		<Rating name="read-only" value={4} readOnly />
-						<Typography variant="subtitle2">21 Sessions</Typography>
+		<Typography variant="subtitle2">21 Sessions</Typography>
 
 		</Box>
 		)

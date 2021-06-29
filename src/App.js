@@ -10,6 +10,7 @@ import NotFoundPage from "./pages/404Page";
 
 import DashBoardPage from "./pages/admin/DashBoard";
 import DoctorsListPage from "./pages/admin/DoctorsListPage";
+import AddNewDoctor from "./pages/admin/AddNewDoctor";
 
 
 
@@ -32,6 +33,9 @@ function App() {
             </Route>
             <Route exact path="/admin/dashboard/doctors">
               <DoctorsListPage />
+            </Route>
+             <Route exact path="/admin/dashboard/adddoctor">
+              <AddNewDoctor />
             </Route>
             
              <Route path="*">

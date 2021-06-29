@@ -3,6 +3,8 @@ import { DoctorHeader, DoctorCardList } from "../../components/";
 import DashboardLayout from "../../Layouts/DashboardLayout";
 
 export default function DashBoardPage(props) {
+	
+	
 	// useEffect(() => {
 	//   (async () => {
 	//   	let r = await getProducts()

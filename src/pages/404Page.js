@@ -18,10 +18,6 @@ export default function LoginPage() {
   const classes = useStyles();
   const history = useHistory();
 
-  const [email, emailSet] = useState("admin@mail.com");
-  const [password, passwordSet] = useState("pass");
-  const [loading, loadingSet] = useState(false);
-  const [failLogin, failLoginSet] = useState(false);
 
   // useEffect(() => {
   //   (async () => {})();

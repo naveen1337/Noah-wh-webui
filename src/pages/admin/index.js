@@ -24,8 +24,8 @@ export default function LoginPage() {
   const classes = useStyles();
   const history = useHistory();
 
-  const [email, emailSet] = useState("admin@mail.com");
-  const [password, passwordSet] = useState("pass");
+  const [mail, mailSet] = useState("admin1@mail.com");
+  const [password, passwordSet] = useState("admin");
   const [loading, loadingSet] = useState(false);
   const [failLogin, failLoginSet] = useState(false);
 
@@ -34,21 +34,21 @@ export default function LoginPage() {
   // }, []);
 
   const loginAction = async () => {
-    loadingSet(false);
-    history.push("/admin/dashboard");
-    // loadingSet(true);
-    // failLoginSet(false);
-    // const response = await login({
-    //   email: email,
-    //   password: password,
-    // });
-    // if (response) {
-    //   loadingSet(false);
-    //   history.push("/admin/dashboard");
-    // } else {
-    //   failLoginSet(true);
-    //   loadingSet(false);
-    // }
+    // loadingSet(false);
+    // history.push("/admin/dashboard");
+    loadingSet(true);
+    failLoginSet(false);
+    const response = await login({
+      mail: mail,
+      password: password,
+    });
+    if (response) {
+      loadingSet(false);
+      history.push("/admin/dashboard");
+    } else {
+      failLoginSet(true);
+      loadingSet(false);
+    }
   };
 
   return (
@@ -69,8 +69,8 @@ export default function LoginPage() {
           </Box>
           <Box m={2}>
             <TextField
-              value={email}
-              onChange={(e) => emailSet(e.target.value)}
+              value={mail}
+              onChange={(e) => mailSet(e.target.value)}
               fullWidth={true}
               label="Email"
               variant="outlined"
