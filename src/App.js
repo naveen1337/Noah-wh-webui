@@ -7,12 +7,10 @@ import HomePage from "./pages/HomePage";
 import AdminLoginPage from "./pages/admin/index";
 import NotFoundPage from "./pages/404Page";
 
-
 import DashBoardPage from "./pages/admin/DashBoard";
 import DoctorsListPage from "./pages/admin/DoctorsListPage";
 import AddNewDoctor from "./pages/admin/AddNewDoctor";
-
-
+import DoctorPage from "./pages/admin/DoctorPage";
 
 const queryClient = new QueryClient();
 
@@ -34,11 +32,14 @@ function App() {
             <Route exact path="/admin/dashboard/doctors">
               <DoctorsListPage />
             </Route>
-             <Route exact path="/admin/dashboard/adddoctor">
+            <Route exact path="/admin/dashboard/adddoctor">
               <AddNewDoctor />
             </Route>
+            <Route exact path="/admin/dashboard/doctor/:id">
+              <DoctorPage />
+            </Route>
             
-             <Route path="*">
+            <Route path="*">
               <NotFoundPage />
             </Route>
           </Switch>

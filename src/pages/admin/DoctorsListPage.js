@@ -1,16 +1,18 @@
+
+
 import { Grid, Typography, Box } from "@material-ui/core/";
 import { DoctorHeader, DoctorCardList } from "../../components/";
 import DashboardLayout from "../../Layouts/DashboardLayout";
+import { useQuery } from "react-query";
 
-export default function DashBoardPage(props) {
-	
-	
-	// useEffect(() => {
-	//   (async () => {
-	//   	let r = await getProducts()
-	//   	console.log(r)
-	//   })();
-	// }, []);
+import { getAllDoctorRemote } from "../../remote/doctorRemote";
+
+export default function DoctorList(props) {
+	const { isLoading, isSuccess, isError, data } = useQuery(
+		"alldoctors",
+		getAllDoctorRemote
+	);
+
 
 	return (
 		<DashboardLayout>
@@ -21,15 +23,27 @@ export default function DashBoardPage(props) {
 					</Box>
 				</Grid>
 				<Grid container item xs={12} spacing={2}>
-					<Grid item xs={12} md={6}>
-						<DoctorCardList />
-					</Grid>
-					<Grid item xs={12} md={6}>
-						<DoctorCardList />
-					</Grid>
-					<Grid item xs={12} md={6}>
-						<DoctorCardList />
-					</Grid>
+					{isSuccess ? (
+						data.map((item) => {
+							console.log(item);
+							return (
+								<Grid key={item._id} item xs={12} md={6}>
+									<DoctorCardList
+									id={item._id}
+										name={item.name}
+										image={item.image}
+										charge={item.charge}
+										qualification={item.qualification}
+										specialist={item.specialist}
+									/>
+									
+								</Grid>
+							);
+
+						})
+					) : (
+						<p>Loading...</p>
+					)}
 				</Grid>
 			</Grid>
 		</DashboardLayout>

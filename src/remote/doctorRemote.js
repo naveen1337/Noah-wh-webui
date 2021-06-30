@@ -9,12 +9,12 @@ const req_create = "/doctors/create";
 export const getAllDoctorRemote = async (payload) => {
 	try {
 		const response = await remoteWorker(
-			"POST",
+			"GET",
 			BASE_URL + req_get_all,
 			payload
 		);
-		if (response.status === "success") {
-			return response.data;
+		if (response) {
+			return response;
 		} else {
 			throw Error("getAllDoctorRemote Failed");
 		}

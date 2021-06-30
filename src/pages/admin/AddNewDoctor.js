@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+
 import {
 	Typography,
 	Backdrop,
@@ -12,7 +14,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import DashboardLayout from "../../Layouts/DashboardLayout";
-import { useState, useEffect } from "react";
 import { createDoctorRemote } from "../../remote/doctorRemote";
 
 const useStyles = makeStyles((theme) => ({

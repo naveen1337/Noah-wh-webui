@@ -1,6 +1,8 @@
-import { Box, Grid, Typography, useMediaQuery,Chip } from "@material-ui/core/";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Rating from '@material-ui/lab/Rating';
+import { useState, useEffect } from "react";
+import { Box, Grid, Typography, Chip} from "@material-ui/core/";
+import { makeStyles } from "@material-ui/core/styles";
+import Rating from "@material-ui/lab/Rating";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -15,76 +17,98 @@ const useStyles = makeStyles((theme) => ({
 
 export default function DoctorCardList(props) {
 	const classes = useStyles();
-	const theme = useTheme();
-	const mobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+	const [image, imageSet] = useState(props.image);
+
 	return (
-		<Box style={{ height: "100%" }} border={0} p={2} m={1} bgcolor="#ffffff">
+		<Box component={Link} to={`/admin/dashboard/doctor/${props.id}`} style={{textDecoration:"none",color: "inherit"}}>
+		
+		<Box
+			style={{ height: "100%" }}
+			border={0}
+			p={2}
+			m={1}
+			bgcolor="#ffffff"
+		>
 			<Grid container>
 				<Grid item xs={12} md={3}>
-					<Box display="flex" flexDirection="column" alignItems="center" border={0}>
+					<Box
+						display="flex"
+						flexDirection="column"
+						alignItems="center"
+						border={0}
+					>
 						<img
 							style={{
 								width: 120,
 								height: "100%",
 								resizeMode: "contain",
 								borderRadius: "100%",
-
 							}}
-							src="../../sampledoctor1.webp"
-							alt="doctor"
+							src={image}
+							onError={() => imageSet("../../nodoctorimage.png")}
+							alt={props.name}
 						/>
 						<Typography align="center" variant="subtitle2">
 							Consulting Fee
 						</Typography>
 						<Typography align="center" variant="subtitle1">
-							50Rs
+							{props.charge}₹
 						</Typography>
 					</Box>
 				</Grid>
 				<Grid item xs={12} md={9}>
 					<Box px={1} border={0}>
-						<Typography variant="h5">Dr.Robert Ford</Typography>
-						<Spicialities/>
-						<Typography variant="h6">Tamil / English</Typography>	
-						<Ratings/>
+						<Typography variant="h5">{props.name}</Typography>
+						<Spicialities
+							data={props.specialist
+								.split(",")
+								.map((item) => item.trim())}
+						/>
+						<Typography variant="h6">
+							{props.qualification}
+						</Typography>
+						<Ratings />
 					</Box>
 				</Grid>
 			</Grid>
 		</Box>
+	</Box>
 	);
 }
 
-
-const Spicialities = (props)=>{
+const Spicialities = (props) => {
+	console.log(props);
 	return (
-		<Box display="flex" flexDirection="row" alignItems="center" flexWrap="wrap">
-		<Box pr={1} py={1}>
-		<Chip size="small" variant="outlined" color="primary" label="MBBS" />
+		<Box
+			display="flex"
+			flexDirection="row"
+			alignItems="center"
+			flexWrap="wrap"
+		>
+			{props.data.map((item) => {
+				return (
+					<Box key={item} pr={1} py={1}>
+						<Chip
+							size="small"
+							variant="outlined"
+							color="primary"
+							label={item}
+						/>
+					</Box>
+				);
+			})}
 		</Box>
-		<Box pr={1} py={1}>
-		<Chip size="small" variant="outlined" color="primary" label="Children" />
-		</Box>
-		<Box pr={1} py={1}>
-		<Chip size="small" variant="outlined" color="primary" label="Counselling" />
-		</Box>		
-		</Box>
-		)
-}
 
-const ServiceTime = (props)=>{
-	return (
-		<Box py={1}>
-		<Chip size="large" variant="outlined" color="secondary" label="Time: 9:30 - 12-30 & 18:00 - 20:00" />
-		</Box>	
-		)
-}
 
-const Ratings = (props)=>{
+	);
+};
+
+const Ratings = (props) => {
 	return (
 		<Box>
-		<Rating name="read-only" value={4} readOnly />
-		<Typography variant="subtitle2">21 Sessions</Typography>
-
+			<Rating name="read-only" value={4} readOnly />
+			<Typography variant="subtitle2">0 Sessions</Typography>
 		</Box>
-		)
-}
+	);
+};
