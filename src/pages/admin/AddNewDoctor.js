@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import {
 	Typography,
@@ -34,6 +34,7 @@ let values = {
 	address: "The Address",
 	"contact": "+919987654321",
 	"sub_contact": "+911123456789",
+	"calendly": "https://calendly.com/",
 
 };
 
@@ -43,8 +44,6 @@ export default function AddNewDoctor(props) {
 		register,
 		handleSubmit,
 		formState: { errors },
-		reset,
-		watch
 	} = useForm({
 		defaultValues:values
 	});
@@ -64,6 +63,7 @@ export default function AddNewDoctor(props) {
 		}
 		
 		obj.timings = data.timings.split(',').map(item => item.trim())
+		obj.specialist = data.specialist.split(',').map(item => item.trim())
 		obj.address = {
 		"city": data.address
 		}
@@ -154,7 +154,6 @@ export default function AddNewDoctor(props) {
 						<Grid item xs={12} md={6}>
 							<TextField
 								defaultValue={values.password}
-								defaultValue="password"
 								{...register("password", {
 									required: true,
 									minLength: 1,
@@ -312,6 +311,28 @@ export default function AddNewDoctor(props) {
 								variant="outlined"
 							/>
 						</Grid>
+
+						<Grid item xs={12} md={12}>
+							<TextField
+								defaultValue={values.calendly}
+
+								{...register("calendly", {
+									required: true,
+									minLength: 2,
+								})}
+								error={errors.calendly ? true : false}
+								helperText={
+									errors.calendly
+										? "calendly length minimum be 1 - 40"
+										: false
+								}
+								fullWidth={true}
+								label="Calendly Link"
+								variant="outlined"
+							/>
+						</Grid>
+
+						
 						<Grid item xs={12} md={12}>
 							<TextField
 								defaultValue={values.address}

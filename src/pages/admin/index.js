@@ -11,7 +11,7 @@ import { useHistory } from "react-router-dom";
 
 // import { useQueryClient, useQuery } from "react-query";
 import { makeStyles } from "@material-ui/core/styles";
-import { login } from "../../remote/appRemote";
+import { login,sendBeat } from "../../remote/appRemote";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -29,9 +29,12 @@ export default function LoginPage() {
   const [loading, loadingSet] = useState(false);
   const [failLogin, failLoginSet] = useState(false);
 
-  // useEffect(() => {
-  //   (async () => {})();
-  // }, []);
+  useEffect(() => {
+    (async () => {
+      const beat = await sendBeat()
+      console.log(beat)
+    })();
+  }, []);
 
   const loginAction = async () => {
     // loadingSet(false);

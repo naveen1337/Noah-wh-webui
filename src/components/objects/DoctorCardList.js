@@ -1,22 +1,10 @@
 import { useState, useEffect } from "react";
 import { Box, Grid, Typography, Chip} from "@material-ui/core/";
-import { makeStyles } from "@material-ui/core/styles";
 import Rating from "@material-ui/lab/Rating";
 import { Link } from "react-router-dom";
-
-const useStyles = makeStyles((theme) => ({
-	root: {
-		background: "rgb(48,224,20);",
-		background:
-			"linear-gradient(90deg, rgba(48,224,20,1) 0%, rgba(0,212,255,1) 100%);	",
-	},
-	boldfont: {
-		fontWeight: 500,
-	},
-}));
+import noImage from "../../images/nodoctorimage.png"
 
 export default function DoctorCardList(props) {
-	const classes = useStyles();
 
 	const [image, imageSet] = useState(props.image);
 
@@ -46,7 +34,7 @@ export default function DoctorCardList(props) {
 								borderRadius: "100%",
 							}}
 							src={image}
-							onError={() => imageSet("../../nodoctorimage.png")}
+							onError={() => imageSet(noImage)}
 							alt={props.name}
 						/>
 						<Typography align="center" variant="subtitle2">
@@ -61,9 +49,7 @@ export default function DoctorCardList(props) {
 					<Box px={1} border={0}>
 						<Typography variant="h5">{props.name}</Typography>
 						<Spicialities
-							data={props.specialist
-								.split(",")
-								.map((item) => item.trim())}
+							data={props.specialist}
 						/>
 						<Typography variant="h6">
 							{props.qualification}

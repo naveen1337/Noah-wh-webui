@@ -1,6 +1,4 @@
-import { Grid, Paper,Box, Typography } from "@material-ui/core/";
-import { Call } from "@material-ui/icons/";
-
+import { Grid, Box, Typography } from "@material-ui/core/";
 
 export default function DashboardTopbar(props) {
 	return (
@@ -17,16 +15,16 @@ export default function DashboardTopbar(props) {
 			borderRadius={2}
 		>
 			<Box>
-				<Typography style={{color:"#ffffff"}} variant="subtitle1">Jan 20 2022</Typography>
+				<Typography style={{ color: "#ffffff" }} variant="subtitle1">
+					Jan 20 2022
+				</Typography>
 			</Box>
 			<Box component={Grid} display={{ xs: "none", md: "block" }}>
 				<Box display="flex" flexDirection="row" alignItems="center">
-					<Box
-						display="flex"
-						flexDirection="row"
-						alignItems="center"
-					>	
-						<Typography style={{color:"#ffffff"}} variant="h6">Logout</Typography>
+					<Box display="flex" flexDirection="row" alignItems="center">
+						<Typography style={{ color: "#ffffff" }} variant="h6">
+							Logout
+						</Typography>
 					</Box>
 				</Box>
 			</Box>

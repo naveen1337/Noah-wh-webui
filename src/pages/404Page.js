@@ -1,27 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Typography,
   Grid,
   Box,
 } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme) => ({
-  button: {
-    width: "100%",
-    height: 55,
-  },
-}));
 
 export default function LoginPage() {
-  const classes = useStyles();
-  const history = useHistory();
-
-
-  // useEffect(() => {
-  //   (async () => {})();
-  // }, []);
 
 
   return (
