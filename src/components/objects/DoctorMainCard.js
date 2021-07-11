@@ -10,27 +10,45 @@ import {
 	DialogContent,
 	DialogContentText,
 	DialogTitle,
+	Backdrop,
+	CircularProgress,
 } from "@material-ui/core/";
 import noImage from "../../images/nodoctorimage.png";
 import { useState, useEffect } from "react";
 import { LocationOnSharp } from "@material-ui/icons/";
+import { deleteByIdRemote } from "../../remote/doctorRemote";
+import { useHistory } from "react-router-dom";
 
 export default function DoctorMainCard(props) {
 	const [image, imageSet] = useState(props.data.image);
-	const [modal, setModal] = useState(true);
+	const [modal, setModal] = useState(false);
+	const [loading, setLoading] = useState(false);
+	const history = useHistory();
 
-	const deleteDoctor = () => {
-		// setModal(false);
+	const deleteDoctor = async () => {
+		console.log('Delete Called')
+		setModal(false);
+		setLoading(true);
+		const response = await deleteByIdRemote(props.data._id);
+		setLoading(false);
+		if (response) {
+			history.push("/admin/dashboard/doctors");
+		} else {
+			alert("Failed :(");
+		}
+
+		// setLoading(true)
 	};
 
 	return (
 		<Paper>
-			<DeleteDialog
+			{/*<DeleteDialog
 				modal={modal}
 				setModal={setModal}
 				deleteDoctor={deleteDoctor}
 				id={props.data._id}
 			/>
+*/}
 			<Box border={0} p={2} borderRadius={2}>
 				<Grid container>
 					<Grid item xs={12} md={2}>
@@ -44,7 +62,6 @@ export default function DoctorMainCard(props) {
 							onError={() => imageSet(noImage)}
 							alt={props.data.name}
 						/>
-						<p>Hello {JSON.stringify(modal)}</p>
 					</Grid>
 					<Grid item xs={12} md={8}>
 						<DoctorTextInformation
@@ -60,7 +77,7 @@ export default function DoctorMainCard(props) {
 					<Grid item xs={12} md={12}>
 						<Box p={2}>
 							<Grid container>
-								<Grid xs={12} md={6}>
+								<Grid item xs={12} md={6}>
 									<Typography variant="h5" gutterBottom>
 										Contact:
 									</Typography>
@@ -71,7 +88,7 @@ export default function DoctorMainCard(props) {
 										{props.data.sub_contact}
 									</Typography>
 								</Grid>
-								<Grid xs={12} md={6}>
+								<Grid item xs={12} md={6}>
 									<Typography variant="h5" gutterBottom>
 										Calendly:
 									</Typography>
@@ -85,6 +102,46 @@ export default function DoctorMainCard(props) {
 					</Grid>
 				</Grid>
 			</Box>
+
+			<Dialog
+				open={modal}
+				aria-labelledby="alert-dialog-title"
+				aria-describedby="alert-dialog-description"
+			>
+				<DialogTitle id="alert-dialog-title">
+					Do you want to delete a doctor
+				</DialogTitle>
+				<DialogContent>
+					<DialogContentText id="alert-dialog-description">
+						It will Remove all the information related to that
+						doctor. The action is irrevesible
+					</DialogContentText>
+				</DialogContent>
+				<DialogActions>
+					<Button
+						onClick={() => setModal(false)}
+						color="primary"
+						autoFocus
+					>
+						Cancel
+					</Button>
+					<Button onClick={deleteDoctor} color="primary">
+						Ok
+					</Button>
+				</DialogActions>
+			</Dialog>
+
+			<Dialog
+				open={loading}
+				aria-labelledby="alert-dialog-title"
+				aria-describedby="alert-dialog-description"
+			>
+				<DialogContent>
+					<DialogContentText id="alert-dialog-description">
+						Please Wait ...
+					</DialogContentText>
+				</DialogContent>
+			</Dialog>
 		</Paper>
 	);
 }
@@ -186,35 +243,7 @@ const Spicialities = (props) => {
 };
 
 const DeleteDialog = (props) => {
-	return (
-		<Dialog
-			open={props.modal}
-			aria-labelledby="alert-dialog-title"
-			aria-describedby="alert-dialog-description"
-		>
-			<DialogTitle id="alert-dialog-title">
-				Do you want to delete a doctor
-			</DialogTitle>
-			<DialogContent>
-				<DialogContentText id="alert-dialog-description">
-					It will Remove all the information related to that doctor.
-					The action is irrevesible
-				</DialogContentText>
-			</DialogContent>
-			<DialogActions>
-				<Button
-					onClick={props.setModal(false)}
-					color="primary"
-					autoFocus
-				>
-					Cancel
-				</Button>
-				<Button onClick={props.deleteDoctor} color="primary">
-					Ok
-				</Button>
-			</DialogActions>
-		</Dialog>
-	);
+	return null;
 };
 
 // {

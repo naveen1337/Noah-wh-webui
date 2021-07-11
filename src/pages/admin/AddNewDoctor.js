@@ -23,20 +23,20 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-let values = {
-	mail: "mail@mail.com",
-	password: "test",
-	image: "https://www.wtutors.com/image/user/203",
-	qualification: "MBBS",
-	charge: "200",
-	specialist: "Childrens,Fever, Headache",
-	timings: "08:00-11-30, 13:00-15:00",
-	address: "The Address",
-	"contact": "+919987654321",
-	"sub_contact": "+911123456789",
-	"calendly": "https://calendly.com/",
+// let values = {
+// 	mail: "mail@mail.com",
+// 	password: "test",
+// 	image: "https://www.wtutors.com/image/user/203",
+// 	qualification: "MBBS",
+// 	charge: "200",
+// 	specialist: "Childrens,Fever, Headache",
+// 	timings: "08:00-11-30, 13:00-15:00",
+// 	address: "The Address",
+// 	"contact": "+919987654321",
+// 	"sub_contact": "+911123456789",
+// 	"calendly": "https://calendly.com/",
 
-};
+// };
 
 export default function AddNewDoctor(props) {
 	const classes = useStyles();
@@ -44,41 +44,33 @@ export default function AddNewDoctor(props) {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm({
-		defaultValues:values
-	});
+	} = useForm();
 	const history = useHistory();
 
 	const [loading, loadingSet] = useState(false);
 	const [error, errorSet] = useState(false);
 
-
-
 	const createDoctor = async (data) => {
-		console.log('called')
+		console.log("called");
 		errorSet(false);
 		loadingSet(true);
 		let obj = {
-			...data
-		}
-		
-		obj.timings = data.timings.split(',').map(item => item.trim())
-		obj.specialist = data.specialist.split(',').map(item => item.trim())
-		obj.address = {
-		"city": data.address
-		}
-		const response = await createDoctorRemote(obj)
-		loadingSet(false);
-		if(response){
-			history.push("/admin/dashboard/doctors");
-		}
-		else{
-			errorSet(true)
-		}
-		
-		
-	};
+			...data,
+		};
 
+		obj.timings = data.timings.split(",").map((item) => item.trim());
+		obj.specialist = data.specialist.split(",").map((item) => item.trim());
+		obj.address = {
+			city: data.address,
+		};
+		const response = await createDoctorRemote(obj);
+		loadingSet(false);
+		if (response) {
+			history.push("/admin/dashboard/doctors");
+		} else {
+			errorSet(true);
+		}
+	};
 
 	return (
 		<DashboardLayout>
@@ -95,7 +87,6 @@ export default function AddNewDoctor(props) {
 					<Grid container spacing={3}>
 						<Grid item xs={12} md={4}>
 							<TextField
-								
 								{...register("username", {
 									required: true,
 									minLength: 3,
@@ -114,7 +105,6 @@ export default function AddNewDoctor(props) {
 						</Grid>
 						<Grid item xs={12} md={8}>
 							<TextField
-								
 								{...register("name", {
 									required: true,
 									minLength: 5,
@@ -134,7 +124,6 @@ export default function AddNewDoctor(props) {
 
 						<Grid item xs={12} md={6}>
 							<TextField
-								defaultValue={values.mail}
 								{...register("mail", {
 									required: true,
 									minLength: 1,
@@ -153,7 +142,6 @@ export default function AddNewDoctor(props) {
 						</Grid>
 						<Grid item xs={12} md={6}>
 							<TextField
-								defaultValue={values.password}
 								{...register("password", {
 									required: true,
 									minLength: 1,
@@ -172,7 +160,6 @@ export default function AddNewDoctor(props) {
 						</Grid>
 						<Grid item xs={12}>
 							<TextField
-								defaultValue={values.image}
 								{...register("image", {
 									required: true,
 									minLength: 1,
@@ -191,7 +178,6 @@ export default function AddNewDoctor(props) {
 						</Grid>
 						<Grid item xs={12} md={8}>
 							<TextField
-								defaultValue={values.qualification}
 								{...register("qualification", {
 									required: true,
 									minLength: 1,
@@ -211,7 +197,6 @@ export default function AddNewDoctor(props) {
 
 						<Grid item xs={12} md={4}>
 							<TextField
-								defaultValue={values.charge}
 								{...register("charge", {
 									required: true,
 									minLength: 1,
@@ -221,7 +206,6 @@ export default function AddNewDoctor(props) {
 								helperText={
 									errors.charge ? "charge Required" : false
 								}
-								
 								fullWidth={true}
 								label="Consultation Charge"
 								variant="outlined"
@@ -230,7 +214,6 @@ export default function AddNewDoctor(props) {
 
 						<Grid item xs={12} md={12}>
 							<TextField
-								defaultValue={values.specialist}
 								{...register("specialist", {
 									required: true,
 									minLength: 1,
@@ -252,19 +235,18 @@ export default function AddNewDoctor(props) {
 
 						<Grid item xs={12} md={6}>
 							<TextField
-								defaultValue={values.contact}
 								{...register("contact", {
 									required: true,
 									minLength: 13,
 									maxLength: 13,
 								})}
-								error={errors.specialist ? true : false}
+
+								error={errors.contact ? true : false}
 								helperText={
-									errors.specialist
+									errors.contact
 										? "Valid Contact Required"
 										: false
 								}
-	
 								fullWidth={true}
 								label="Contact"
 								variant="outlined"
@@ -273,7 +255,6 @@ export default function AddNewDoctor(props) {
 
 						<Grid item xs={12} md={6}>
 							<TextField
-								defaultValue={values.sub_contact}
 								{...register("sub_contact", {
 									required: true,
 									minLength: 13,
@@ -285,7 +266,6 @@ export default function AddNewDoctor(props) {
 										? "Valid sub_contact Required"
 										: false
 								}
-						
 								fullWidth={true}
 								label="Specialist in, add comma to separate the points"
 								variant="outlined"
@@ -294,8 +274,6 @@ export default function AddNewDoctor(props) {
 
 						<Grid item xs={12} md={12}>
 							<TextField
-								defaultValue={values.timings}
-
 								{...register("timings", {
 									required: true,
 									minLength: 2,
@@ -314,8 +292,6 @@ export default function AddNewDoctor(props) {
 
 						<Grid item xs={12} md={12}>
 							<TextField
-								defaultValue={values.calendly}
-
 								{...register("calendly", {
 									required: true,
 									minLength: 2,
@@ -332,11 +308,8 @@ export default function AddNewDoctor(props) {
 							/>
 						</Grid>
 
-						
 						<Grid item xs={12} md={12}>
 							<TextField
-								defaultValue={values.address}
-
 								{...register("address", {
 									required: true,
 									minLength: 5,
@@ -368,12 +341,14 @@ export default function AddNewDoctor(props) {
 				</form>
 			</Box>
 
-			<Backdrop  open={loading}>
-  <CircularProgress color="inherit" />
-</Backdrop>
+			<Backdrop open={loading}>
+				<CircularProgress color="inherit" />
+			</Backdrop>
 
-<Snackbar open={error} message="Doctor Creation Failed, Please Check your Input, UserName is should to unique" />
-
+			<Snackbar
+				open={error}
+				message="Doctor Creation Failed, Please Check your Input, UserName,Mail should to unique and Valid"
+			/>
 		</DashboardLayout>
 	);
 }

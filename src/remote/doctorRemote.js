@@ -59,4 +59,20 @@ export const doctorByIdRemote = async (payload) => {
 	}
 };
 
+export const deleteByIdRemote = async (id) => {
+	try {
+		const response = await remoteWorker(
+			"DELETE",
+			BASE_URL + `${req_getById}/${id}`);
+		if (response.status === "success") {
+			return response;
+		} else {
+			throw Error("deleteByIdRemote Failed");
+		}
+	} catch (err) {
+		console.log("Err", err);
+		return false;
+	}
+};
+
 
