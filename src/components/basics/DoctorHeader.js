@@ -7,7 +7,7 @@ export default function DoctorPageHeader(props){
 	return(
 		<Grid container alignItems="center">
 		<Grid item xs={12} md={10}>
-		<Typography variant="h5">23 Doctors Available</Typography>
+		<Typography variant="h5">All Doctors</Typography>
 		</Grid>
 		<Grid item xs={12} md={2}>
 		<Box>

@@ -1,6 +1,13 @@
-import { Grid, Box, Typography } from "@material-ui/core/";
+import { Grid, Box, Typography,Button } from "@material-ui/core/";
+import { useHistory } from "react-router-dom";
 
 export default function DashboardTopbar(props) {
+	const history = useHistory()
+	const logout = ()=>{
+		// localStorage.removeItem('authtoken')
+		history.push('/admin')
+	}
+
 	return (
 		<Box
 			border={0}
@@ -16,15 +23,15 @@ export default function DashboardTopbar(props) {
 		>
 			<Box>
 				<Typography style={{ color: "#ffffff" }} variant="subtitle1">
-					Jan 20 2022
+					{Date.now()}
 				</Typography>
 			</Box>
 			<Box component={Grid} display={{ xs: "none", md: "block" }}>
 				<Box display="flex" flexDirection="row" alignItems="center">
 					<Box display="flex" flexDirection="row" alignItems="center">
-						<Typography style={{ color: "#ffffff" }} variant="h6">
+						<Button onClick={logout} style={{ color: "#ffffff" }} size="large">
 							Logout
-						</Typography>
+						</Button>
 					</Box>
 				</Box>
 			</Box>

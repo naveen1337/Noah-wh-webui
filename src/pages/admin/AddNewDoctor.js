@@ -89,13 +89,13 @@ export default function AddNewDoctor(props) {
 							<TextField
 								{...register("username", {
 									required: true,
-									minLength: 3,
+									minLength: 4,
 									maxLength: 20,
 								})}
 								error={errors.username ? true : false}
 								helperText={
 									errors.username
-										? "username length should be 3 - 20"
+										? "username length should be 4 - 20"
 										: false
 								}
 								fullWidth={true}
@@ -107,13 +107,13 @@ export default function AddNewDoctor(props) {
 							<TextField
 								{...register("name", {
 									required: true,
-									minLength: 5,
+									minLength: 6,
 									maxLength: 40,
 								})}
 								error={errors.name ? true : false}
 								helperText={
 									errors.name
-										? "name length should be 4 - 50"
+										? "name length should be 6 - 50"
 										: false
 								}
 								fullWidth={true}
@@ -126,13 +126,14 @@ export default function AddNewDoctor(props) {
 							<TextField
 								{...register("mail", {
 									required: true,
-									minLength: 1,
+									minLength: 3,
 									maxLength: 40,
 								})}
+								type="email"
 								error={errors.mail ? true : false}
 								helperText={
 									errors.mail
-										? "mail length should be 1 - 40"
+										? "mail length should be 3 - 40"
 										: false
 								}
 								fullWidth={true}
@@ -144,13 +145,13 @@ export default function AddNewDoctor(props) {
 							<TextField
 								{...register("password", {
 									required: true,
-									minLength: 1,
+									minLength: 4,
 									maxLength: 40,
 								})}
 								error={errors.password ? true : false}
 								helperText={
 									errors.password
-										? "password length should be 1 - 40"
+										? "password length should be 4 - 40"
 										: false
 								}
 								fullWidth={true}
@@ -162,13 +163,13 @@ export default function AddNewDoctor(props) {
 							<TextField
 								{...register("image", {
 									required: true,
-									minLength: 1,
+									minLength: 5,
 									maxLength: 40,
 								})}
 								error={errors.image ? true : false}
 								helperText={
 									errors.image
-										? "image length should be 3 - 40"
+										? "image length should be 5 - 40"
 										: false
 								}
 								fullWidth={true}
@@ -180,13 +181,13 @@ export default function AddNewDoctor(props) {
 							<TextField
 								{...register("qualification", {
 									required: true,
-									minLength: 1,
+									minLength: 3,
 									maxLength: 40,
 								})}
 								error={errors.qualification ? true : false}
 								helperText={
 									errors.qualification
-										? "qualification length should be 1 - 40"
+										? "qualification length should be 3 - 40"
 										: false
 								}
 								fullWidth={true}
@@ -267,7 +268,7 @@ export default function AddNewDoctor(props) {
 										: false
 								}
 								fullWidth={true}
-								label="Specialist in, add comma to separate the points"
+								label="Additional Contact"
 								variant="outlined"
 							/>
 						</Grid>
@@ -334,7 +335,7 @@ export default function AddNewDoctor(props) {
 								variant="contained"
 								color="primary"
 							>
-								Add Product
+								Add Doctor
 							</Button>
 						</Grid>
 					</Grid>
